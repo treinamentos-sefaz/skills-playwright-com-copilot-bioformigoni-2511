@@ -1,0 +1,10 @@
+const { test, expect } = require('@playwright/test');
+
+test('confirma a inscrição na newsletter', async ({ page }) => {
+  await page.goto('/');
+  await page.getByLabel('Seu e-mail', { exact: true }).fill('ada@example.com');
+  await page.getByRole('button', { name: 'Inscrever', exact: true }).click();
+  await expect(
+    page.getByRole('main').filter({ hasText: 'Inscrição confirmada!' })
+  ).toBeVisible();
+});
